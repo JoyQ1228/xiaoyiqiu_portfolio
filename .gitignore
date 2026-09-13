@@ -1,0 +1,16 @@
+# 历史备份目录（不公开）
+_source_BACKUP_BEFORE_DELETE/
+
+# 部署构建产物（不进入源码仓库）
+dist/
+
+# Node / 编辑器
+node_modules/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# 本地日志与缓存
+*.log
+.cache/
