@@ -14,3 +14,15 @@ Thumbs.db
 # 本地日志与缓存
 *.log
 .cache/
+
+# 本地调试工具与临时日志(不进 Vercel 部署,也不进源码仓库)
+_debug_*.py
+_verify_*.py
+_process_*.py
+_inspect_*.py
+_serve_nocache.py
+_process_log.txt
+.process_log.txt
+.serve.log
+.serve_err.log
+.syntax_check.js

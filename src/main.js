@@ -175,8 +175,11 @@ function pjMockup(item) {
   /* 已有真截图时直接渲染图片,不再拼 DOM mockup —— 整块 .pj-mock 让位给真图 */
   if (item.cover) {
     return `
-      <div class="pj-mock pj-mock--cover" aria-hidden="true">
-        <img class="pj-cover" src="${escapeHtml(item.cover)}" alt="${escapeHtml(item.title)} 截图" loading="lazy" decoding="async">
+      <div class="pj-mock pj-mock--cover">
+        <button class="pj-cover-btn" type="button" data-zoom-src="${escapeHtml(item.cover)}" data-zoom-alt="${escapeHtml(item.title)} 截图" aria-label="放大查看 ${escapeHtml(item.title)} 截图">
+          <img class="pj-cover" src="${escapeHtml(item.cover)}" alt="${escapeHtml(item.title)} 截图" loading="lazy" decoding="async">
+          <span class="pj-cover-btn__hint" aria-hidden="true">点击放大</span>
+        </button>
       </div>`;
   }
   if (item.mockup === 'scene') {
@@ -596,6 +599,7 @@ function render() {
       </section>
     </main>
     ${modalMarkup()}
+    ${lightboxMarkup()}
     <p class="site-toast" data-site-toast hidden role="status"></p>`;
 }
 
@@ -660,6 +664,58 @@ function createModal() {
   };
 
   modal?.querySelectorAll('[data-modal-close]').forEach((node) => node.addEventListener('click', close));
+  return { open, close };
+}
+
+/* 图片放大预览：点击带 [data-zoom-src] 的按钮，把 src 写到全屏 lightbox 的 <img> 上。
+   复用全屏遮罩 + ESC 关闭，结构独立于 .ui-modal，不影响 detail modal。 */
+function lightboxMarkup() {
+  return `
+    <div class="ui-lightbox" data-lightbox hidden role="dialog" aria-modal="true" aria-label="图片放大预览" tabindex="-1">
+      <div class="ui-lightbox__scrim" data-lightbox-close></div>
+      <img class="ui-lightbox__img" data-lightbox-img alt="">
+      <button class="ui-lightbox__close" type="button" data-lightbox-close aria-label="关闭预览">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>`;
+}
+
+function createLightbox() {
+  const box = document.querySelector('[data-lightbox]');
+  const img = document.querySelector('[data-lightbox-img]');
+  if (!box || !img) return null;
+  let lastFocused = null;
+  const onKey = (e) => { if (e.key === 'Escape') close(); };
+  function close() {
+    if (box.hidden) return;
+    box.classList.remove('is-open');
+    document.removeEventListener('keydown', onKey);
+    document.documentElement.classList.remove('is-modal-open');
+    setTimeout(() => {
+      box.hidden = true;
+      img.removeAttribute('src');
+      img.alt = '';
+    }, 200);
+    lastFocused?.focus?.();
+  }
+  function open(src, alt) {
+    if (!src) return;
+    lastFocused = document.activeElement;
+    img.src = src;
+    img.alt = alt || '';
+    box.hidden = false;
+    requestAnimationFrame(() => box.classList.add('is-open'));
+    document.documentElement.classList.add('is-modal-open');
+    document.addEventListener('keydown', onKey);
+  }
+  box.querySelectorAll('[data-lightbox-close]').forEach((node) => node.addEventListener('click', close));
+  /* 事件代理：所有 [data-zoom-src] 按钮点击都打开 lightbox */
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-zoom-src]');
+    if (!trigger) return;
+    e.preventDefault();
+    open(trigger.dataset.zoomSrc, trigger.dataset.zoomAlt);
+  });
   return { open, close };
 }
 
@@ -1152,6 +1208,7 @@ function bindEvents() {
   setTimeout(() => cards.forEach(reveal), 1500);
 
   const ui = createModal();
+  createLightbox();
   initExperience(ui);
   initProjects(ui);
   initHobbies();

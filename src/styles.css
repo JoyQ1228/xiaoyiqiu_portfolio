@@ -629,6 +629,17 @@ body::before {
 .ui-modal__tags { display:flex; flex-wrap:wrap; gap:clamp(5px,.6vw,8px); margin:clamp(16px,2.3svh,24px) 0 0; padding:clamp(12px,1.8svh,18px) 0 0; border-top:1px solid #eceaf5; list-style:none; }
 .ui-modal__tags li { padding:clamp(3px,.5svh,6px) clamp(9px,1vw,14px); border-radius:999px; background:#ece7fb; color:#6c5ce7; font-weight:700; font-size:clamp(10px,1.3svh,13px); }
 
+/* —— 图片放大预览：全屏黑底 + 居中 <img>，独立于详情弹窗 —— */
+.ui-lightbox { position:fixed; z-index:80; inset:0; display:grid; place-items:center; padding:clamp(16px,3vw,40px); }
+.ui-lightbox[hidden] { display:none; }
+.ui-lightbox__scrim { position:absolute; inset:0; background:rgba(10,8,18,.88); opacity:0; transition:opacity .22s ease; }
+.ui-lightbox.is-open .ui-lightbox__scrim { opacity:1; }
+.ui-lightbox__img { position:relative; z-index:1; max-width:min(1200px,92vw); max-height:88svh; object-fit:contain; border-radius:8px; box-shadow:0 30px 80px rgba(0,0,0,.55); opacity:0; transform:scale(.97); transition:opacity .22s ease,transform .28s cubic-bezier(.22,.61,.36,1); }
+.ui-lightbox.is-open .ui-lightbox__img { opacity:1; transform:none; }
+.ui-lightbox__close { position:absolute; z-index:2; top:clamp(14px,2.2svh,22px); right:clamp(14px,2.2svh,22px); display:grid; place-items:center; width:clamp(36px,4.2svh,46px); aspect-ratio:1; border:1px solid rgba(255,255,255,.25); border-radius:50%; background:rgba(20,18,32,.55); color:#fff; backdrop-filter:blur(6px); transition:background .18s ease,border-color .18s ease,transform .18s ease; }
+.ui-lightbox__close:hover { background:rgba(20,18,32,.9); border-color:rgba(255,255,255,.6); transform:scale(1.05); }
+.ui-lightbox__close svg { width:50%; height:50%; }
+
 /* 弹窗打开时锁住底部长页滚动，并补回滚动条宽度，避免整页左右跳动 */
 html.is-modal-open { overflow:hidden; }
 
@@ -772,6 +783,12 @@ html.is-modal-open { overflow:hidden; }
 @supports (container-type:inline-size) { .pj-mock { container-type:inline-size; --m:.505cqw; } }
 /* 2026-09-12:有真截图时 .pj-mock 直接放图,不再用 DOM mockup + 角标 chip(已删) */
 .pj-mock--cover { background:transparent; box-shadow:0 18px 40px rgba(112,84,152,.18),0 2px 6px rgba(112,84,152,.08); }
+/* 2026-09-14:cover 容器从 <div> 升级为 <button>,整体可点击放大;img 保持原有填充,
+   提示标签仅 hover 时显现,不打扰静观 */
+.pj-cover-btn { position:relative; display:block; width:100%; height:100%; padding:0; margin:0; border:0; background:transparent; cursor:zoom-in; color:inherit; }
+.pj-cover-btn:focus-visible { outline:3px solid rgba(124,104,238,.6); outline-offset:4px; }
+.pj-cover-btn__hint { position:absolute; left:50%; bottom:14px; transform:translate(-50%,6px); padding:6px 12px; border-radius:999px; background:rgba(20,18,32,.78); color:#fff; font-size:12px; font-weight:600; letter-spacing:.04em; opacity:0; transition:opacity .25s ease,transform .25s ease; pointer-events:none; }
+.pj-cover-btn:hover .pj-cover-btn__hint, .pj-cover-btn:focus-visible .pj-cover-btn__hint { opacity:1; transform:translate(-50%,0); }
 .pj-cover { display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
 
 .pj-win { position:absolute; inset:8.5% 5%; display:flex; flex-direction:column; overflow:hidden; border-radius:calc(var(--m) * 3.4); border:1px solid rgba(255,255,255,.9); background:#fff; box-shadow:0 10px 26px rgba(90,64,140,.12); }
