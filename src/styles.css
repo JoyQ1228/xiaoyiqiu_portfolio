@@ -330,7 +330,10 @@ body::before {
 /* 移动端：两张卡上下排，卡片高度交回内容；容器查询轴仍是 inline-size、--u 用 1cqw，
    照片要给回固定比例（此时纵向没有 stage 高度可吸） */
 @media (max-width:700px) {
-  .edu { min-height:100svh; padding:96px 20px 56px; }
+  /* 修复窄屏 edu 内容溢出覆盖到 exp 的问题:desktop 用了 height:100svh 把容器固定成一屏高,
+     移动端窄屏两张卡 column 排,内容很容易超过 100svh,溢出的部分会显示在容器外覆盖到
+     下方模块。改成 height:auto 让容器跟内容自适应。 */
+  .edu { height:auto; min-height:100svh; padding:96px 20px 56px; }
   .edu-inner { gap:20px; }
   /* 窄屏不需要「错位」效果,两个 margin 都清掉 */
   .edu-intro { margin-top:0; }
