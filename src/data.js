@@ -156,7 +156,7 @@ export const portfolio = {
       mockup: 'scene',
       demo: '',
       link: 'https://joyq1228.github.io/scene-words/',
-      cover: './public/assets/projects-scene-words.jpg',
+      cover: './public/assets/projects-scene-words.gif',
     },
   ],
   /* 「技能」按用户给的版面参考图归成三张大卡：每张含 icon + 标题 + 描述 + 标签；
