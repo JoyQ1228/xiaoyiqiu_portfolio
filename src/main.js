@@ -303,7 +303,6 @@ function hbCard(item, index) {
         <div class="hb-card__body">
           <strong class="hb-card__name">${escapeHtml(item.title)}<em>${escapeHtml(item.en)}</em></strong>
           <p class="hb-card__detail">${escapeHtml(item.detail)}</p>
-          <span class="hb-card__hint" aria-hidden="true">查看作品集 <span class="hb-card__hint-arrow">↪</span></span>
         </div>
       </article>`;
 }
