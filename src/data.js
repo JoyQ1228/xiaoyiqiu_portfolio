@@ -77,7 +77,7 @@ export const portfolio = {
       shortEn: 'NIO',
       roleLabel: '订单交付产品 / 产品实习生',
       period: '2025.12–2026.04',
-      motto: '聚焦订单与交付，用数字化营销与 AI 提效提升销售转化',
+      motto: '用数字化营销与 AI 提效，贯通订单到交付全链路',
       tags: ['订单与交付', '用户体验', '数据分析'],
       logo: './public/assets/logo-nio.webp',
       logoPlate: true,
