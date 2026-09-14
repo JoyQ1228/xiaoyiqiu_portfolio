@@ -380,7 +380,10 @@ body::before {
      背面要装下 header + "主要工作" + 3 段每段 ~3-4 行的详细工作,
      原 .42 算出来背面可用高度 ~580px,3 段+头~550px 时刚好贴边,排版一紧就溢出;
      调到 .44 后可用 ~610px,留出 60px 缓冲。卡片整体高了约 5%,扇形比例不变。 */
-  --card-h:min(clamp(340px,calc(78svh - 145px),880px),calc(var(--folder-max) * .44));
+  /* 卡片整体等比缩小约 10%,让 .exp 模块视觉权重跟其他模块更接近
+     (项目历史里累计放大了 ~13%,现在回收一档)。其余 --card-w/--folder-h/
+     --fan-x/--folder-w 等都从 --card-h 派生,改这一处就全套联动。 */
+  --card-h:min(clamp(320px,calc(70svh - 130px),800px),calc(var(--folder-max) * .42));
   --card-w:calc(var(--card-h) * .84);
   --folder-h:calc(var(--card-h) * .70);
   --pocket-lip:calc(var(--folder-h) * .44);   /* 袋口弧线最低点距文件夹底边 */
