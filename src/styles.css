@@ -641,7 +641,10 @@ html.is-modal-open { overflow:hidden; }
 
 /* 移动端：扇形与袋口在窄屏没有意义，改为整列堆叠，点击卡片直接开详情 */
 @media (max-width:700px) {
-  .exp { height:auto; min-height:100svh; padding:96px 20px 52px; }
+  /* 修复窄屏标题跑到屏幕中段的问题:desktop 用了 justify-content:center 让内容垂直居中,
+     移动端把 .exp-inner 切成 block 后,容器还按居中布局,就把矮矮的 .exp-inner 顶到屏幕中段,
+     视觉上跟上方教育背景的卡片挨太近像重叠。改成 flex-start 让内容从顶部排下来。 */
+  .exp { height:auto; min-height:100svh; padding:96px 20px 52px; justify-content:flex-start; }
   .exp-inner { display:block; }
   .exp-aside { position:static; margin:clamp(12px,2svh,18px) 0 0; align-items:flex-start; text-align:left; }
   .exp-aside i { margin:0 0 clamp(5px,.9svh,9px); }
