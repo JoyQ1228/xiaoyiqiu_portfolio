@@ -997,6 +997,10 @@ html.is-modal-open { overflow:hidden; }
 .hb-card__name { display:block; color:#1e2a3c; font-weight:800; font-size:calc(var(--hb-w) * .082); line-height:1.2; letter-spacing:-.025em; }
 .hb-card__name em { display:block; margin-top:.16em; color:#8b93ad; font-style:normal; font-weight:700; font-size:.58em; letter-spacing:.12em; text-transform:uppercase; }
 .hb-card__detail { margin:calc(var(--hb-w) * .028) 0 0; color:#55668a; font-size:calc(var(--hb-w) * .058); line-height:1.55; }
+.hb-card__hint { display:inline-flex; align-items:baseline; gap:.32em; margin:calc(var(--hb-w) * .034) 0 0; color:#6c5ce7; font-size:calc(var(--hb-w) * .05); font-weight:700; letter-spacing:.04em; transition:transform .25s cubic-bezier(.22,.61,.36,1),color .2s ease; }
+.hb-card__hint-arrow { display:inline-block; transition:transform .25s cubic-bezier(.22,.61,.36,1); }
+.hb-card:hover .hb-card__hint { color:#1e2a3c; transform:translateX(2px); }
+.hb-card:hover .hb-card__hint-arrow { transform:translateX(4px); }
 /* 四张卡四种底色:blush / sky / lilac / cream */
 .hb-card--blush .hb-card__media { background:linear-gradient(152deg,#ffd9e7,#ffbfd6 58%,#f5a9c9); }
 .hb-card--sky .hb-card__media { background:linear-gradient(152deg,#d2e4ff,#a9c9f7 58%,#8bb2ec); }
