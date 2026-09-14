@@ -761,7 +761,7 @@ html.is-modal-open { overflow:hidden; }
 .pj-btn svg { width:1.12em; height:1.12em; }
 .pj-btn--primary { border-color:rgba(255,255,255,.34); background:linear-gradient(145deg,#8b74ee,#6c5ce7); box-shadow:0 10px 22px rgba(108,92,231,.26); color:#fff; }
 .pj-btn--primary svg { fill:rgba(255,255,255,.92); }
-.pj-more { display:inline-flex; align-items:center; gap:.4em; margin-left:auto; border:0; padding:calc(var(--row-pad) * .3) 0; background:none; color:#3a3350; font-size:var(--f-btn); font-weight:700; transition:color .2s ease,gap .2s ease; }
+.pj-more { display:inline-flex; align-items:center; gap:.4em; border:0; padding:calc(var(--row-pad) * .3) 0; background:none; color:#3a3350; font-size:var(--f-btn); font-weight:700; transition:color .2s ease,gap .2s ease; }
 .pj-more:hover { gap:.7em; color:#6c5ce7; }
 .pj-more svg { width:1.16em; height:1.16em; color:#6c5ce7; }
 

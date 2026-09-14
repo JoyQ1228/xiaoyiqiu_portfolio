@@ -266,7 +266,6 @@ function pjRow(item) {
           <ul class="pj-tags">${item.tags.map((tag) => `<li>${escapeHtml(tag)}</li>`).join('')}</ul>
           <p class="pj-row__desc">${escapeHtml(item.summary)}</p>
           <div class="pj-actions">
-            <a class="pj-btn pj-btn--primary" href="${item.demo || '#'}"${pending('demo')}>${ICON_PLAY}查看动图</a>
             <a class="pj-btn" href="${item.link || '#'}"${pending('link')}>${ICON_LINK}项目链接</a>
             <button class="pj-more" type="button" data-pj-more data-pj-target="${escapeHtml(item.id)}">展开详情${ICON_ARROW_R}</button>
           </div>
