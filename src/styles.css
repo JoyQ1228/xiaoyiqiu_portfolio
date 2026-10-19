@@ -1278,3 +1278,6 @@ html.is-modal-open { overflow:hidden; }
   .ct-postcard-deco { display:none; }
   .ct-stage { padding:0; }
 }
+.icp-footer { position:relative; z-index:3; width:100%; margin:clamp(14px,2svh,28px) auto 0; padding:0 20px 18px; text-align:center; font-size:12px; line-height:1.5; }
+.icp-footer a { color:#65718d; text-decoration:none; }
+.icp-footer a:hover { color:#3a2ec4; text-decoration:underline; }
