@@ -596,6 +596,7 @@ function render() {
             ${ctPostcard()}
           </div>
         </div>
+        <footer class="icp-footer"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">蜀ICP备2026055473号-1</a></footer>
       </section>
     </main>
     ${modalMarkup()}
